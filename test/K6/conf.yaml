@@ -1,0 +1,32 @@
+namespace: authentication
+test_definitions:
+  - test_file: test/K6/user_stories/systemRegister/systemRegisterCrud.js
+    env_file: "test/K6/user_stories/systemRegister/common.env"
+    contexts:
+      - environment: at22
+        test_type:
+          enabled: false
+        test_run:
+          name: system-register-crud
+          secrets:
+            - br-test.2025-07-03
+  - test_file: test/K6/user_stories/systemRegister/systemRegisterRights.js
+    env_file: "test/K6/user_stories/systemRegister/common.env"
+    contexts:
+      - environment: at22
+        test_type:
+          enabled: false
+        test_run:
+          name: system-register-rights
+          secrets:
+            - br-test.2025-07-03
+  - test_file: test/K6/user_stories/systemRegister/systemRegisterAccessPackages.js
+    env_file: "test/K6/user_stories/systemRegister/common.env"
+    contexts:
+      - environment: at22
+        #test_type:
+        #  enabled: false
+        test_run:
+          name: system-register-accesspackages
+          secrets:
+            - br-test.2025-07-03
