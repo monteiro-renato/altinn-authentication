@@ -1,5 +1,12 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+/**
+ * Retrieves a Registered System for the systemId.
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @param {string } systemId The Id of the Registered System
+ * @returns (string | ArrayBuffer | null)
+ */
 export function GetDeletedSystemByID(systemRegisterClient, systemId) {
     // Needs to use the Vendor as the "normal" endpoint returns a 200 and no indication of a soft deletion (i.e isDeleted: true)
     const res = systemRegisterClient.GetVendorSystemRegisterById(systemId)

@@ -1,5 +1,13 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+/**
+ * Updates the rights on a registered system
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @param {string } systemId The Id of the Registered System
+*  @param {Array<{action: string, resource: Array<{value: string, id: string}>}>} body
+ * @returns (string | ArrayBuffer | null)
+ */
 export function UpdateRightsVendorSystemRegister(systemRegisterClient, systemId, body) {
     const res = systemRegisterClient.UpdateRightsVendorSystemRegister(systemId, body)
     check(res, {

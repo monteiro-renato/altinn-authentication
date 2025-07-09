@@ -1,15 +1,35 @@
 import http from 'k6/http';
 
 class SystemRegisterApiClient {
+    /**
+     *
+     * @param {string} baseUrl e.g. https://platform.at22.altinn.cloud
+     * @param {*} tokenGenerator // TODO: Need to create the interface
+     */
     constructor(
         baseUrl,
         tokenGenerator
     ) {
+        /**
+        * @property {*} tokenGenerator A class that generates tokens used in authenticated calls to the API
+        */
         this.tokenGenerator = tokenGenerator
+        /**
+         * @property {string} FULL_PATH The path to the api including protocol, hostname, etc.
+         */
         this.FULL_PATH = baseUrl + "/authentication/api/v1/systemregister"
+        /**
+         * @property {string} BASE_PATH The path to the api without host information
+         */
         this.BASE_PATH = "/authentication/api/v1/systemregister"
     }
 
+
+    /**
+     * Retrieves the List of all the Registered Systems, except those marked as deleted.
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/get_systemregister|/systemregister}
+     * @returns http.RefinedResponse
+     */
     GetAllSystemsFromRegister() {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -24,6 +44,12 @@ class SystemRegisterApiClient {
         return http.get(url, params);
     }
 
+    /**
+     * Retrieves a Registered System frontend DTO for the systemId.
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/get_systemregister__systemId_|/systemregister/systemId}
+     * @param {string } systemId The Id of the Registered System
+     * @returns http.RefinedResponse
+     */
     GetSystemRegisterById(systemId) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -38,6 +64,12 @@ class SystemRegisterApiClient {
         return http.get(url, params);
     }
 
+    /**
+     * Retrieves a Registered System for the systemId.
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/get_systemregister_vendor__systemId_|/systemregister/vendor/systemId}
+     * @param {string } systemId The Id of the Registered System
+     * @returns http.RefinedResponse
+     */
     GetVendorSystemRegisterById(systemId) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -52,6 +84,18 @@ class SystemRegisterApiClient {
         return http.get(url, params);
     }
 
+    /**
+     * Replaces the entire registered system
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/put_systemregister_vendor__systemId_|/systemregister/vendor/systemId}
+     * @param {string } systemId The Id of the Registered System
+     * @param {string } vendorId
+     * @param {string } name
+     * @param {string[] } clientId
+     * @param {{ en: string, nn: string, nb: string } } description
+     * @param {Array<{resource: Array<{value: string, id: string}>}>} rights
+     * @param {string[] } allowedRedirectUrls
+     * @returns http.RefinedResponse
+     */
     UpdateVendorSystemRegister(
         systemId,
         vendorId,
@@ -90,6 +134,11 @@ class SystemRegisterApiClient {
         return http.put(url, JSON.stringify(body), params);
     }
 
+    /**
+    * @param {string } systemId The Id of the Registered System
+    * @param {Array<{ urn: string }> } body
+    * @returns http.RefinedResponse
+    */
     UpdateVendorAccessPackages(systemId, body) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -104,6 +153,13 @@ class SystemRegisterApiClient {
         return http.put(url, JSON.stringify(body), params);
     }
 
+    /**
+     * Updates the rights on a registered system
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/put_systemregister_vendor__systemId__rights|/systemregister/vendor/systemId/rights}
+    *  @param {string } systemId The Id of the Registered System
+    *  @param {Array<{action: string, resource: Array<{value: string, id: string}>}>} body
+     * @returns http.RefinedResponse
+     */
     UpdateRightsVendorSystemRegister(systemId, body) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -118,6 +174,12 @@ class SystemRegisterApiClient {
         return http.put(url, JSON.stringify(body), params);
     }
 
+    /**
+     * Set the registered system to be deleted.
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/delete_systemregister_vendor__systemId_|/systemregister/vendor/systemId}
+     * @param {string } systemId The Id of the Registered System
+     * @returns http.RefinedResponse
+     */
     DeleteSystemSystemRegister(systemId) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -132,6 +194,12 @@ class SystemRegisterApiClient {
         return http.del(url, null, params);
     }
 
+    /**
+     * Retrieves a list of the predfined default rights for the Product type, if any
+     * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/get_systemregister__systemId__rights|/systemregister/systemId/rights}
+     * @param {string } systemId The Id of the Registered System
+     * @returns http.RefinedResponse
+     */
     GetSystemRegisterRights(systemId) {
         const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
         const token = this.tokenGenerator.generateAccessToken(scopes)
@@ -146,7 +214,17 @@ class SystemRegisterApiClient {
         return http.get(url, params);
     }
 
-    // TODO: Validation and defaults?
+    /**
+    * Create a new System
+    * OpenAPI for {@link https://docs.altinn.studio/api/authentication/spec/#/SystemRegister/post_systemregister_vendor|/systemregister/vendor}
+    * @param {string } vendorId
+    * @param {string } name
+    * @param {string[] } clientId
+    * @param {{ en: string, nn: string, nb: string } } description
+    * @param {Array<{resource: Array<{value: string, id: string}>}>} rights
+    * @param {string[] } allowedRedirectUrls
+    * @returns http.RefinedResponse
+    */
     CreateSystemRegister(
         vendorId,
         name,

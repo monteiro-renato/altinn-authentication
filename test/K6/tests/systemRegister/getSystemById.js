@@ -1,5 +1,13 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+
+/**
+ * Retrieves a Registered System frontend DTO for the systemId.
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @param {string } systemId The Id of the Registered System
+ * @returns (string | ArrayBuffer | null)
+ */
 export function GetSystemById(systemRegisterClient, systemId) {
     const res = systemRegisterClient.GetSystemRegisterById(systemId)
     check(res, {

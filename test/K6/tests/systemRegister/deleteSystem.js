@@ -1,5 +1,12 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+/**
+ * Set the registered system to be deleted.
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @param {string } systemId The Id of the Registered System
+ * @returns (string | ArrayBuffer | null)
+ */
 export function DeleteSystem(systemRegisterClient, systemId) {
     const res = systemRegisterClient.DeleteSystemSystemRegister(systemId)
     check(res, {

@@ -1,5 +1,11 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+/**
+ * Retrieves the List of all the Registered Systems, except those marked as deleted.
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @returns (string | ArrayBuffer | null)
+ */
 export function GetSystems(systemRegisterClient) {
     const res = systemRegisterClient.GetAllSystemsFromRegister()
     check(res, {

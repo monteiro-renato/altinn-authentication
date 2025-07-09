@@ -1,5 +1,12 @@
 import { check } from 'k6';
+import { SystemRegisterApiClient } from "../../clients/systemRegister"
 
+/**
+ * @param {SystemRegisterApiClient} systemRegisterClient A client to interact with the System Register API
+ * @param {string } systemId The Id of the Registered System
+ * @param {Array<{ urn: string }> } body
+ * @returns (string | ArrayBuffer | null)
+ */
 export function UpdateVendorAccessPackages(systemRegisterClient, systemId, body) {
     const res = systemRegisterClient.UpdateVendorAccessPackages(systemId, body)
     check(res,

@@ -50,21 +50,19 @@ export default function () {
         });
 
         const newAccessPackages = [
-            {
-                "urn": "urn:altinn:accesspackage:post-og-telekommunikasjon",
-                "urn": "urn:altinn:accesspackage:dokumentbasert-tilsyn",
-                "urn": "urn:altinn:accesspackage:infrastruktur",
-                "urn": "urn:altinn:accesspackage:patent-varemerke-design",
-                "urn": "urn:altinn:accesspackage:tilskudd-stotte-erstatning",
-                "urn": "urn:altinn:accesspackage:mine-sider-kommune",
-                "urn": "urn:altinn:accesspackage:politi-og-domstol",
-                "urn": "urn:altinn:accesspackage:rapportering-statistikk",
-                "urn": "urn:altinn:accesspackage:forskning",
-                "urn": "urn:altinn:accesspackage:folkeregister",
-                "urn": "urn:altinn:accesspackage:maskinporten-scopes",
-                "urn": "urn:altinn:accesspackage:maskinlesbare-hendelser",
-                "urn": "urn:altinn:accesspackage:maskinporten-scopes-nuf",
-            }
+            { "urn": "urn:altinn:accesspackage:post-og-telekommunikasjon" },
+            { "urn": "urn:altinn:accesspackage:dokumentbasert-tilsyn" },
+            { "urn": "urn:altinn:accesspackage:infrastruktur" },
+            { "urn": "urn:altinn:accesspackage:patent-varemerke-design" },
+            { "urn": "urn:altinn:accesspackage:tilskudd-stotte-erstatning" },
+            { "urn": "urn:altinn:accesspackage:mine-sider-kommune" },
+            { "urn": "urn:altinn:accesspackage:politi-og-domstol" },
+            { "urn": "urn:altinn:accesspackage:rapportering-statistikk" },
+            { "urn": "urn:altinn:accesspackage:forskning" },
+            { "urn": "urn:altinn:accesspackage:folkeregister" },
+            { "urn": "urn:altinn:accesspackage:maskinporten-scopes" },
+            { "urn": "urn:altinn:accesspackage:maskinlesbare-hendelser" },
+            { "urn": "urn:altinn:accesspackage:maskinporten-scopes-nuf" },
         ]
 
         res = UpdateVendorAccessPackages(systemRegisterClient, systemId, newAccessPackages)
