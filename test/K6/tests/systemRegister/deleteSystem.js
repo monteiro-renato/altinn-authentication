@@ -1,5 +1,5 @@
 import { check } from 'k6';
-import { SystemRegisterApiClient } from "../../clients/systemRegister"
+import { SystemRegisterApiClient } from "../../clients/systemRegister.js"
 
 /**
  * Set the registered system to be deleted.

@@ -28,11 +28,12 @@ export function teardown(data) {
 */
 export default function () {
     // Initialization
-    const maskinportenTokenGenerator
+    // "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
+    const tokenGenerator
         = new MaskinportenAccessTokenGenerator()
 
     const systemRegisterClient
-        = new SystemRegisterApiClient(__ENV.BASE_URL, maskinportenTokenGenerator)
+        = new SystemRegisterApiClient(__ENV.BASE_URL, tokenGenerator)
 
     // variables and whatnot
     const [name, allowedRedirectUrls, clientId, vendorId, systemId, description, rights, accessPackages] = defaultObject();

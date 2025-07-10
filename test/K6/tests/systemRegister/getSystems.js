@@ -1,5 +1,5 @@
 import { check } from 'k6';
-import { SystemRegisterApiClient } from "../../clients/systemRegister"
+import { SystemRegisterApiClient } from "../../clients/systemRegister.js"
 
 /**
  * Retrieves the List of all the Registered Systems, except those marked as deleted.

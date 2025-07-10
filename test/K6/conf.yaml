@@ -4,12 +4,13 @@ test_definitions:
     env_file: "test/K6/user_stories/systemRegister/common.env"
     contexts:
       - environment: at22
-        test_type:
-          enabled: false
+        #test_type:
+        #  enabled: false
         test_run:
           name: system-register-crud
           secrets:
             - br-test.2025-07-03
+            # - token-generator-creds
   - test_file: test/K6/user_stories/systemRegister/systemRegisterRights.js
     env_file: "test/K6/user_stories/systemRegister/common.env"
     contexts:
@@ -24,8 +25,8 @@ test_definitions:
     env_file: "test/K6/user_stories/systemRegister/common.env"
     contexts:
       - environment: at22
-        #test_type:
-        #  enabled: false
+        test_type:
+          enabled: false
         test_run:
           name: system-register-accesspackages
           secrets:

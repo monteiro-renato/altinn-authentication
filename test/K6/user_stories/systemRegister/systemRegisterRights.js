@@ -39,11 +39,11 @@ export function teardown(data) {
 }
 */
 export default function () {
-    const maskinportenTokenGenerator
+    const tokenGenerator
         = new MaskinportenAccessTokenGenerator()
 
     const systemRegisterClient
-        = new SystemRegisterApiClient(__ENV.BASE_URL, maskinportenTokenGenerator)
+        = new SystemRegisterApiClient(__ENV.BASE_URL, tokenGenerator)
 
     // variables and whatnot
     const [name, allowedRedirectUrls, clientId, vendorId, systemId, description, rights] = defaultObject();

@@ -31,8 +31,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     GetAllSystemsFromRegister() {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = this.FULL_PATH
         const params = {
             tags: { name: url },
@@ -51,8 +50,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     GetSystemRegisterById(systemId) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/${systemId}`
         const params = {
             tags: { name: `${this.FULL_PATH}/systemId` },
@@ -71,8 +69,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     GetVendorSystemRegisterById(systemId) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor/${systemId}`
         const params = {
             tags: { name: `${this.FULL_PATH}/vendor/systemId` },
@@ -105,8 +102,7 @@ class SystemRegisterApiClient {
         rights,
         allowedRedirectUrls
     ) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor/${systemId}`
         const params = {
             tags: { name: `${this.FULL_PATH}/vendor/systemId` },
@@ -140,8 +136,7 @@ class SystemRegisterApiClient {
     * @returns http.RefinedResponse
     */
     UpdateVendorAccessPackages(systemId, body) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor/${systemId}/accesspackages`
         const params = {
             tags: { name: `${this.FULL_PATH}/vendor/systemId/accesspackages` },
@@ -161,8 +156,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     UpdateRightsVendorSystemRegister(systemId, body) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor/${systemId}/rights`
         const params = {
             tags: { name: `${this.FULL_PATH}/vendor/systemId/rights` },
@@ -181,8 +175,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     DeleteSystemSystemRegister(systemId) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor/${systemId}`
         const params = {
             tags: { name: `${this.FULL_PATH}/vendor/systemId` },
@@ -201,8 +194,7 @@ class SystemRegisterApiClient {
      * @returns http.RefinedResponse
      */
     GetSystemRegisterRights(systemId) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/${systemId}/rights`
         const params = {
             tags: { name: `${this.FULL_PATH}/systemId/rights` },
@@ -234,8 +226,7 @@ class SystemRegisterApiClient {
         allowedRedirectUrls = [],
         accessPackages = []
     ) {
-        const scopes = "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin"
-        const token = this.tokenGenerator.generateAccessToken(scopes)
+        const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/vendor`
         const body = {
             "Id": `${vendorId}_${name}`,

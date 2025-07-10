@@ -1,4 +1,4 @@
-import { check, group, uuidv4, SystemRegisterApiClient, MaskinportenAccessTokenGenerator } from './commonImports.js';
+import { check, group, uuidv4, SystemRegisterApiClient, MaskinportenAccessTokenGenerator, EnterpriseTokenGenerator } from './commonImports.js';
 import {
     CreateNewSystem,
     GetSystems,
@@ -48,12 +48,22 @@ export function teardown(data) {
 }
 
 export default function () {
+    /*
+    const options = new Map();
+    options.set("env", "at22")
+    options.set("ttl", 3600);
+    options.set("scopes", "altinn:authentication/systemregister.write")
+    options.set("orgNo", "214270102");
+    */
+    const options = new Map();
+    options.set("scopes", "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemregister.write altinn:authentication/systemuser.request.read altinn:authentication/systemregister.admin")
     // Initialization
-    const maskinportenTokenGenerator
-        = new MaskinportenAccessTokenGenerator()
+    const tokenGenerator
+        //= new EnterpriseTokenGenerator(options)
+        = new MaskinportenAccessTokenGenerator(options)
 
     const systemRegisterClient
-        = new SystemRegisterApiClient(__ENV.BASE_URL, maskinportenTokenGenerator)
+        = new SystemRegisterApiClient(__ENV.BASE_URL, tokenGenerator)
 
     // variables and whatnot
     const [name, allowedRedirectUrls, clientId, vendorId, systemId, description, rights] = defaultObject();

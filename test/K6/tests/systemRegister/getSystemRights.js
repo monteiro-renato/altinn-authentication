@@ -1,5 +1,5 @@
 import { check } from 'k6';
-import { SystemRegisterApiClient } from "../../clients/systemRegister"
+import { SystemRegisterApiClient } from "../../clients/systemRegister.js"
 
 /**
  * Retrieves a list of the predfined default rights for the Product type, if any
