@@ -1,7 +1,7 @@
 export { check } from 'k6';
 export { group } from 'k6';
 export { uuidv4 } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js';
-export { SystemRegisterApiClient } from "../../clients/systemRegister.js"
+export { SystemRegisterApiClient } from "../../clients/index.js"
 export {
     PersonalTokenGenerator,
     EnterpriseTokenGenerator,

@@ -1,5 +1,5 @@
 import { check } from 'k6';
-import { SystemRegisterApiClient } from "../../clients/systemRegister.js"
+import { SystemRegisterApiClient } from "../../clients/index.js"
 
 /**
  * Create a new System
