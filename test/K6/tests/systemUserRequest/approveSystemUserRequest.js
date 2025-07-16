@@ -3,7 +3,7 @@ import { SystemUserRequestApiClient } from "../../clients/index.js"
 
 /**
  * Create a new System
- * @param {SystemUserRequestApiClient} systemUserRequestApiClient A client to interact with the System Register API
+ * @param {SystemUserRequestApiClient} systemUserRequestApiClient A client to interact with the System User Request API
  * @param {string } systemId
  * @param {string } partyOrgNo
  * @param {Array<{resource: Array<{value: string, id: string}>}>} rights
@@ -13,18 +13,12 @@ import { SystemUserRequestApiClient } from "../../clients/index.js"
  */
 export function ApproveSystemUserRequest(
     systemUserRequestApiClient,
-    systemId,
-    partyOrgNo,
-    rights = [],
-    redirectUrl = "",
-    accessPackages = []
+    partyId,
+    requestId
 ) {
     const res = systemUserRequestApiClient.ApproveSystemUserRequest(
-        systemId,
-        partyOrgNo,
-        rights,
-        redirectUrl,
-        accessPackages
+        partyId,
+        requestId
     )
     check(res, {
         'ApproveSystemUserRequest - status code is 200': (r) => r.status === 200,

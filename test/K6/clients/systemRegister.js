@@ -114,7 +114,7 @@ class SystemRegisterApiClient {
         const body = {
             "Id": `${vendorId}_${name}`,
             "Vendor": {
-                "ID": `0192:${vendorId}`
+                "ID": `0192:${vendorId}` // «0192» is the reference that it is a value from EnhetsRegister # Enhetsregisteret ved Bronnoysundregisterne https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/
             },
             "Name": {
                 "en": `${name}`,
@@ -231,7 +231,7 @@ class SystemRegisterApiClient {
         const body = {
             "Id": `${vendorId}_${name}`,
             "Vendor": {
-                "ID": `0192:${vendorId}`
+                "ID": `0192:${vendorId}` // «0192» is the reference that it is a value from EnhetsRegister # Enhetsregisteret ved Bronnoysundregisterne https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/
             },
             "Name": {
                 "en": `${name}`,
