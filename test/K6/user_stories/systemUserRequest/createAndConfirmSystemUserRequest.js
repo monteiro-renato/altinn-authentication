@@ -1,8 +1,8 @@
-import { check, group, uuidv4, EnterpriseTokenGenerator, MaskinportenAccessTokenGenerator, PersonalTokenGenerator } from '../systemRegister/commonImports.js';
-import { ApproveSystemUserRequest } from '../../tests/systemUserRequest/index.js';
-import { CreateSystemUserRequest } from "../../tests/systemUserRequest/index.js"
+import { check, group } from "k6"
+import { uuidv4, EnterpriseTokenGenerator, PersonalTokenGenerator } from '../../commonImports.js';
 import { SystemUserRequestApiClient, SystemRegisterApiClient } from "../../clients/index.js"
-import { CreateNewSystem } from "../../tests/systemRegister/index.js"
+import { CreateSystemUserRequest, ApproveSystemUserRequest } from '../../building_blocks/systemUserRequest/index.js';
+import { CreateNewSystem } from "../../building_blocks/systemRegister/index.js"
 
 
 export default function () {
@@ -78,7 +78,7 @@ export default function () {
         }
     });
 
-    group('Create and Confirm System User', function () {
+    group('Create and Confirm System User Request', function () {
         let res = CreateSystemUserRequest(
             vendorSystemUserRequestApiClient,
             systemId,
@@ -88,7 +88,7 @@ export default function () {
             []
         )
         check(res, {
-            'CreateSystemUser - Creating a new SystemUser returns expected object': (r) => {
+            'CreateSystemUserRequest - Creating a new SystemUserRequest returns expected object': (r) => {
                 const jsonBody = JSON.parse(r);
                 return "id" in jsonBody &&
                     "externalRef" in jsonBody &&
@@ -104,7 +104,7 @@ export default function () {
         const requestId = JSON.parse(res).id
 
         const options = new Map();
-        options.set("env", __ENV.ENVIRONMENT) // TODO: Add ENVIRONMENT env var by default? so we can use __ENV.ENVIRONMENT instead
+        options.set("env", __ENV.ENVIRONMENT) // TODO: Add ENVIRONMENT env var by default?
         options.set("ttl", 3600);
         options.set("scopes", "altinn:portal/enduser")
         options.set("userId", mySystemUsers[0].userId);

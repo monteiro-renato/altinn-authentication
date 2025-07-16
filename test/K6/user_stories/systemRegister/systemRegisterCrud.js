@@ -1,4 +1,5 @@
-import { check, group, uuidv4, SystemRegisterApiClient, MaskinportenAccessTokenGenerator, EnterpriseTokenGenerator } from './commonImports.js';
+import { check, group } from "k6"
+import { uuidv4, MaskinportenAccessTokenGenerator } from "../../commonImports.js"
 import {
     CreateNewSystem,
     GetSystems,
@@ -7,7 +8,7 @@ import {
     UpdateRightsVendorSystemRegister,
     DeleteSystem,
     GetDeletedSystemByID
-} from '../../tests/systemRegister/index.js';
+} from '../../building_blocks/systemRegister/index.js';
 
 function defaultObject() {
     const name = `NoeVisuelt${uuidv4()}`

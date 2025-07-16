@@ -1,5 +1,7 @@
-import { check, group, uuidv4, SystemRegisterApiClient, MaskinportenAccessTokenGenerator } from './commonImports.js';
-import { CreateNewSystem, DeleteSystem, UpdateVendorAccessPackages } from '../../tests/systemRegister/index.js';
+import { check, group } from "k6"
+import { uuidv4, MaskinportenAccessTokenGenerator } from '../../commonImports.js';
+import { SystemRegisterApiClient } from '../../clients/index.js'
+import { CreateNewSystem, DeleteSystem, UpdateVendorAccessPackages } from '../../building_blocks/systemRegister/index.js';
 
 
 function defaultObject() {
