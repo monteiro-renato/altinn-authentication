@@ -1,5 +1,6 @@
 // Keep versioned libs in a single file to simplify updates
 export { uuidv4 } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js';
+export { default as papaparse } from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 export {
     PersonalTokenGenerator,
     EnterpriseTokenGenerator,

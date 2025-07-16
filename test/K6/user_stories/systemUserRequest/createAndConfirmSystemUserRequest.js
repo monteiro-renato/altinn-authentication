@@ -1,9 +1,27 @@
 import { check, group } from "k6"
-import { uuidv4, EnterpriseTokenGenerator, PersonalTokenGenerator } from '../../commonImports.js';
+import { SharedArray } from "k6/data";
+import { vu } from 'k6/execution';
+import { papaparse, uuidv4, EnterpriseTokenGenerator, PersonalTokenGenerator } from '../../commonImports.js';
 import { SystemUserRequestApiClient, SystemRegisterApiClient } from "../../clients/index.js"
 import { CreateSystemUserRequest, ApproveSystemUserRequest } from '../../building_blocks/systemUserRequest/index.js';
 import { CreateNewSystem } from "../../building_blocks/systemRegister/index.js"
 
+
+
+function readCsv(filename) {
+    try {
+        return papaparse.parse(open(filename), { header: true, skipEmptyLines: true }).data;
+    } catch (error) {
+        console.log(`Error reading CSV file: ${error}`);
+        return [];
+    }
+}
+
+const systemUsersFilename = `../../testdata/data-${__ENV.ENVIRONMENT || "at22"}-all-customers.csv`;
+
+const mySystemUsers = new SharedArray('systemUsers', function () {
+    return readCsv(systemUsersFilename);
+});
 
 export default function () {
 
@@ -27,18 +45,6 @@ export default function () {
 
     const vendorSystemUserRequestApiClient
         = new SystemUserRequestApiClient(__ENV.BASE_URL, tokenGenerator)
-
-    const mySystemUsers = [
-        {
-            orgNo: "314250052",
-            partyId: "51243526",
-            ssn: "06857897380", // The social security number. # pid is referred to as ssn (social security number) i Altinn Platform.
-            userId: "20013183", // The internal Altinn userId for the authenticated user.
-            userPartyId: "51243526",
-            orgUuid: "368f5a82-97f5-4f33-b372-ac998a4d6b22",
-            orgType: "regnskapsforer"
-        }
-    ]
 
     const resource = "ttd-dialogporten-performance-test-01";
     const name = `perftest${uuidv4()}` // TODO: relevant name
@@ -82,9 +88,9 @@ export default function () {
         let res = CreateSystemUserRequest(
             vendorSystemUserRequestApiClient,
             systemId,
-            mySystemUsers[0].orgNo,//partyOrgNo,
+            mySystemUsers[vu.idInTest - 1].orgNo,//partyOrgNo,
             rights,
-            allowedRedirectUrls[0],
+            allowedRedirectUrls[vu.idInTest - 1],
             []
         )
         check(res, {
@@ -107,7 +113,7 @@ export default function () {
         options.set("env", __ENV.ENVIRONMENT) // TODO: Add ENVIRONMENT env var by default?
         options.set("ttl", 3600);
         options.set("scopes", "altinn:portal/enduser")
-        options.set("userId", mySystemUsers[0].userId);
+        options.set("userId", mySystemUsers[vu.idInTest - 1].userId);
 
         const tokenGenerator
             = new PersonalTokenGenerator(options)
@@ -116,7 +122,7 @@ export default function () {
             = new SystemUserRequestApiClient(__ENV.BASE_URL, tokenGenerator)
 
         res = ApproveSystemUserRequest(approverSystemUserRequestApiClient,
-            mySystemUsers[0].partyId,
+            mySystemUsers[vu.idInTest - 1].partyId,
             requestId)
         check(res, {
             'ApproveSystemUserRequest - Approving the system user request is successful': (r) => {

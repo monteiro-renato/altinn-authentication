@@ -42,5 +42,9 @@ test_definitions:
           env:
             - name: ENVIRONMENT
               value: at22
+            - name: K6_VUS
+              value: 2
+            - name: K6_ITERATIONS
+              value: 10
           secrets:
             - token-generator-creds
