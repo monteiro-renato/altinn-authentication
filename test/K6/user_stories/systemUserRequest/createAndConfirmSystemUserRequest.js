@@ -17,7 +17,8 @@ function readCsv(filename) {
     }
 }
 
-const systemUsersFilename = `../../testdata/data-${__ENV.ENVIRONMENT || "at22"}-all-customers.csv`;
+// const systemUsersFilename = `../../testdata/data-${__ENV.ENVIRONMENT || "at22"}-all-customers.csv`;
+const systemUsersFilename = `../../testdata/data-${__ENV.ENVIRONMENT}-all-customers.csv`;
 
 const mySystemUsers = new SharedArray('systemUsers', function () {
     return readCsv(systemUsersFilename);
@@ -32,7 +33,7 @@ export default function () {
     // Does it matter? performance vs least priviledge / validation of correct scope definition(s)
     // https://docs.altinn.studio/api/authentication/systemuserapi/systemuserrequest/external/
     const options = new Map();
-    options.set("env", __ENV.ENVIRONMENT) // TODO: Add ENVIRONMENT env var by default? so we can use __ENV.ENVIRONMENT instead
+    options.set("env", __ENV.ENVIRONMENT)
     options.set("ttl", 3600);
     options.set("scopes", "altinn:authentication/systemregister.write altinn:authentication/systemuser.request.write altinn:authentication/systemuser.request.read altinn:authorization/authorize")
     options.set("orgNo", systemOwner);
