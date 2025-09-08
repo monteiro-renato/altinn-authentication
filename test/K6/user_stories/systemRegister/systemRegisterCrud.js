@@ -9,6 +9,7 @@ import {
     DeleteSystem,
     GetDeletedSystemByID
 } from '../../building_blocks/systemRegister/index.js';
+import { SystemRegisterApiClient } from "../../clients/index.js"
 
 function defaultObject() {
     const name = `NoeVisuelt${uuidv4()}`

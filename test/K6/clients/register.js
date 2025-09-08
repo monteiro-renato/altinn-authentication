@@ -106,8 +106,6 @@ class RegisterApiClient {
         const token = this.tokenGenerator.getToken()
         const url = `${this.FULL_PATH}/internal/parties/${facilitatorPartyUuid}/customers/ccr/revisor`;
 
-        console.log(url);
-
         return http.get(url,
             {
                 tags: { name: `${this.FULL_PATH}/internal/parties/facilitatorPartyUuid/customers/ccr/revisor` },

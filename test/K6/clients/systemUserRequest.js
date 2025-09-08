@@ -83,6 +83,43 @@ class SystemUserRequestApiClient {
         };
         return http.post(url, null, params);
     }
+
+    /**
+    * Creates a system user request of type agent
+    * OpenAPI for {@link https://docs.altinn.studio/api/authentication/systemuserapi/systemuserrequest/external/#create-an-agent-system-user-request}
+    * @param {string } externalRef
+    * @param {string } systemId
+    * @param {string} partyOrgNo
+    * @param {Array<{ urn: string }> } accessPackages
+    * @param {string } redirectUrl
+
+    * @returns http.RefinedResponse
+    */
+    CreateAgentSystemUserRequest(
+        externalRef,
+        systemId,
+        partyOrgNo,
+        accessPackages = [],
+        redirectUrl = "",
+    ) {
+        const token = this.tokenGenerator.getToken()
+        const url = `${this.FULL_PATH}/vendor/agent`
+        const body = {
+            "externalRef": externalRef,
+            "systemId": systemId,
+            "partyOrgNo": partyOrgNo,
+            "accessPackages": accessPackages,
+            "redirectUrl": redirectUrl
+        };
+        const params = {
+            tags: { name: `${this.FULL_PATH}/vendor/agent` },
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-type': 'application/json',
+            },
+        };
+        return http.post(url, JSON.stringify(body), params);
+    }
 }
 
 export { SystemUserRequestApiClient }
