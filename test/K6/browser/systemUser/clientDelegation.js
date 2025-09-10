@@ -1,7 +1,7 @@
 import { browser } from 'k6/browser';
-import { fail } from 'k6';
+import { check, fail } from 'k6';
 
-import { expect } from 'https://jslib.k6.io/k6-testing/0.5.0/index.js';
+import { expect } from "../../commonImports.js"
 
 import { LoginPage, ClientDelegationPage } from '../pages/index.js';
 import { EnterpriseTokenGenerator } from '../../commonImports.js';
@@ -141,6 +141,7 @@ export default async function () {
 
         // real deal now
         const page = await browser.newPage();
+        let success = true;
         try {
             await page.goto(response.confirmUrl)
 
@@ -154,6 +155,8 @@ export default async function () {
 
             // Verify logout by checking for login page elements
             await expect(loginPage.loginButton).toBeVisible();
+            // at 24
+            //await expect(loginPage.loginButton).toBeHidden();
 
             // Navigate to system user login page
             await loginPage.loginAs(user.pid, user.org);
@@ -183,8 +186,12 @@ export default async function () {
             // Cleanup: All clients need to be removed (api validation) to delete system user
             await clientDelegationPage.deleteSystemUser(name);
         } catch (error) {
-            fail(`Browser iteration failed: ${error.message}`);
+            success = false
+            fail(`Browser iteration failed: ${error}`);
         } finally {
+            check(success, {
+                "Browser Client Delegation": (success) => success
+            })
             await page.close();
             browser.closeContext()
         }

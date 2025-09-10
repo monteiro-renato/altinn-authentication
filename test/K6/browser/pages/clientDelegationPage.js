@@ -1,5 +1,5 @@
 import { Locator, Page } from 'k6/browser';
-import { expect } from 'https://jslib.k6.io/k6-testing/0.5.0/index.js';
+import { expect } from "../../commonImports.js"
 
 export class ClientDelegationPage {
     /**
@@ -50,6 +50,8 @@ export class ClientDelegationPage {
         const button = this.page.getByRole('button', { name: accessPackage });
         expect(button).toBeVisible();
         await expect(this.confirmButton).toBeVisible();
+        // in at24
+        // await expect(this.confirmButton).toBeHidden();
         await this.confirmButton.click();
     }
 

@@ -6,3 +6,11 @@ export {
     EnterpriseTokenGenerator,
     MaskinportenAccessTokenGenerator
 } from "https://raw.githubusercontent.com/Altinn/altinn-platform/a3a8f98228bbce2887462612bb660ecd42e6039a/libs/k6/src/index.js"
+import { expect } from 'https://jslib.k6.io/k6-testing/0.5.0/index.js';
+
+const myExpect = expect.configure({
+    soft: true,
+    softMode: 'throw',
+});
+
+export { myExpect as expect }

@@ -137,11 +137,11 @@ test_definitions:
               value: inline
           secrets:
             - token-generator-creds
-      - environment: at22
+      - environment: at24
         node_type: default
         test_type:
           type: browser
-          enabled: false
+          enabled: true
           config_file: ""
         test_run:
           name: client-delegation
@@ -158,8 +158,8 @@ test_definitions:
             - name: K6_TESTING_DISPLAY
               value: inline
             - name: SYSTEMUSER_URL
-              value: https://am.ui.at22.altinn.cloud/accessmanagement/ui/systemuser/overview
+              value: https://am.ui.at24.altinn.cloud/accessmanagement/ui/systemuser/overview
             - name: ALTINN_UI_URL
-              value: https://at22.altinn.cloud
+              value: https://at24.altinn.cloud
           secrets:
             - token-generator-creds

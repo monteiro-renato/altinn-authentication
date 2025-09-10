@@ -1,5 +1,5 @@
 import { Page } from 'k6/browser';
-import { expect } from 'https://jslib.k6.io/k6-testing/0.5.0/index.js';
+import { expect } from "../../commonImports.js"
 
 export class LoginPage {
     /**
